@@ -1,0 +1,47 @@
+
+  
+  /* Glassy navbar */
+  .navbar {
+    position: absolute;
+    top: 10px; /* Adjust top distance */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2); /* Transparent white */
+    border-radius: 25px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px); /* Glass effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Border for glassy look */
+    z-index: 1000; /* Ensures navbar is on top of the map */
+  }
+  
+  /* Navbar items */
+  .nav-item {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-item img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+  
+  .nav-item input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff; /* Adjust text color */
+    font-size: 14px;
+    padding: 5px;
+  }
+  
+  /* Placeholder color for the input */
+  .nav-item input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  

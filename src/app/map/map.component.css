@@ -1,0 +1,12 @@
+/* Overall map container */
+.map-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+/* Leaflet map */
+#map {
+    height: 100%;
+    width: 100%;
+}
