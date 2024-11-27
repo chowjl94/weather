@@ -29,8 +29,46 @@ interface ApiInfo {
   status: string;
 }
 
+interface HourlyUnits {
+  time: string;
+  relativehumidity_2m: string;
+  direct_radiation: string;
+}
+
+interface Hourly {
+  time: string[];
+  relativehumidity_2m: number[];
+  direct_radiation: number[];
+}
+
+interface DailyUnits {
+  time: string;
+  temperature_2m_max: string;
+  temperature_2m_min: string;
+}
+
+interface Daily {
+  time: string[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+}
+
 export interface WeatherData {
   area_metadata: AreaMetadata[];
   items: WeatherItem[];
   api_info: ApiInfo;
+}
+
+export interface LocationMetrics {
+  latitude: number;
+  longitude: number;
+  generationtime_ms: number;
+  utc_offset_seconds: number;
+  timezone: string;
+  timezone_abbreviation: string;
+  elevation: number;
+  hourly_units: HourlyUnits;
+  hourly: Hourly;
+  daily_units: DailyUnits;
+  daily: Daily;
 }
