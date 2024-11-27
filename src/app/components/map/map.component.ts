@@ -4,6 +4,8 @@ import { MapService } from '../../services/map/map.service';
 import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import { WeatherData } from '../../types/mapTypes';
+import { MarkerModalComponent } from './marker-modal/marker-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-map',
@@ -16,7 +18,11 @@ export class MapComponent implements OnInit {
   map: L.Map | undefined;
   weatherMetaData: WeatherData | undefined;
 
-  constructor(private mapService: MapService, private http: HttpClient) {}
+  constructor(
+    private mapService: MapService,
+    private http: HttpClient,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.configureMap();
@@ -26,9 +32,14 @@ export class MapComponent implements OnInit {
   getMarkers() {
     this.mapService.getWeatherData().subscribe((data) => {
       this.weatherMetaData = data;
-      console.log(this.weatherMetaData);
-      // add markers to the map
       this.addMarkers();
+    });
+  }
+
+  openMarkerModal(data: { name: string; latitude: number; longitude: number }) {
+    this.dialog.open(MarkerModalComponent, {
+      width: '700px',
+      data,
     });
   }
 
@@ -45,10 +56,12 @@ export class MapComponent implements OnInit {
           popupAnchor: [0, -36],
         });
         if (this.map) {
-          L.marker([latitude, longitude], { icon: defaultIcon })
-            .addTo(this.map)
-            .bindPopup(`<b>${name}</b>`)
-            .openPopup();
+          const marker = L.marker([latitude, longitude], {
+            icon: defaultIcon,
+          }).addTo(this.map);
+          marker.on('click', () => {
+            this.openMarkerModal({ name, latitude, longitude });
+          });
         }
       });
     }
