@@ -7,7 +7,7 @@
 
 
 ::ng-deep .mat-mdc-dialog-container .mat-mdc-dialog-content {
-  padding: var(--mat-dialog-content-padding, 10px 16px);
+  padding: var(--mat-dialog-content-padding, 10px 0 16px 0);
 }
 
 .dashboard-content {
@@ -17,16 +17,30 @@
     height: auto;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 
-
-
     .left-column {
       flex: 1; 
       max-width: 20%;
       border-right: 1px solid #ddd;
 
+      .dashboard-item {
+        cursor: pointer;
+        padding: 10px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      
+      .dashboard-item:hover {
+        background-color: #f0f0f0;
+        color:#333
+      }
+      
+      .dashboard-item.selected {
+        background-color: #333; 
+        color: #fff; 
+      }
+
       h3 {
+        padding-left: 10px;
         font-size: 16px;
-        margin-bottom: 12px;
       }
   
       ul {
