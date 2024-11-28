@@ -1,0 +1,10 @@
+.chart-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    z-index: 199999;
+  }
+  canvas {
+    width: 100% !important;
+    height: 400px !important;
+  }
