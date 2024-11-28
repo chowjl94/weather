@@ -1,11 +1,34 @@
-<h2 mat-dialog-title>Marker Details</h2>
+<mat-dialog-content class="dashboard-content">
+  <div class="left-column">
+    <h3>Dashboards</h3>
+    <ul>
+      <li>Inverter Efficiency</li>
+      <li>String Performance</li>
+      <li>Power Curve</li>
+      <li>Soiling Loss</li>
+      <li>Clipping Loss</li>
+    </ul>
+  </div>
 
-<mat-dialog-content>
-  <p><strong>Name:</strong> {{ data.name }}</p>
-  <p><strong>Latitude:</strong> {{ data.latitude }}</p>
-  <p><strong>Longitude:</strong> {{ data.longitude }}</p>
+  <div class="right-column">
+    <h3>{{ data.name }}</h3>
+    <button mat-icon-button class="close-button" mat-dialog-close>
+      &times;
+    </button>
+    <div class="metrics">
+      <div class="metric">small map here</div>
+      <div class="metric">
+        <h4>Today's Weather</h4>
+        <p><strong>Highest</strong> Highest Temp</p>
+        <p><strong>Lowest</strong>Lowest</p>
+      </div>
+    </div>
+
+    <div class="timeseries">
+      <h4>Irradiation Timeseries</h4>
+      <div class="chart-container">
+        <svg width="100%" height="400"></svg>
+      </div>
+    </div>
+  </div>
 </mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Close</button>
-</mat-dialog-actions>

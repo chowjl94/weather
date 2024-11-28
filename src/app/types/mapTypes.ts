@@ -72,3 +72,8 @@ export interface LocationMetrics {
   daily_units: DailyUnits;
   daily: Daily;
 }
+
+export interface DataPoint {
+  date: Date;
+  value: number;
+}

@@ -8,3 +8,9 @@
   height: 100%;
   width: 100%;
 }
+
+
+::ng-deep .cdk-overlay-pane.mat-mdc-dialog-panel {
+  max-width: none !important;
+  width: 90vw !important;
+}

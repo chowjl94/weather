@@ -1,21 +1,20 @@
 
   
-  /* Glassy navbar */
   .navbar {
     position: absolute;
-    top: 10px; /* Adjust top distance */
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.2); /* Transparent white */
+    background: rgba(255, 255, 255, 0.2); 
     border-radius: 25px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px); /* Glass effect */
-    -webkit-backdrop-filter: blur(10px); /* For Safari */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Border for glassy look */
-    z-index: 1000; /* Ensures navbar is on top of the map */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    z-index: 1000; 
   }
   
   /* Navbar items */
@@ -35,12 +34,11 @@
     border: none;
     outline: none;
     background: transparent;
-    color: #fff; /* Adjust text color */
+    color: #fff; 
     font-size: 14px;
     padding: 5px;
   }
   
-  /* Placeholder color for the input */
   .nav-item input::placeholder {
     color: rgba(255, 255, 255, 0.8);
   }
