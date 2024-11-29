@@ -1,0 +1,10 @@
+.minimap-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+#minimap {
+  height: 100%;
+  width: 100%;
+}

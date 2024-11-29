@@ -1,5 +1,12 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  Input,
+} from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { LocationMetrics } from '../../../types/mapTypes';
 
 @Component({
   selector: 'app-line-chart',
@@ -7,6 +14,7 @@ import { Chart } from 'chart.js/auto';
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements AfterViewInit {
+  @Input() data!: LocationMetrics | null;
   @ViewChild('lineChartCanvas') lineChartCanvas!: ElementRef<HTMLCanvasElement>;
   lineChart!: Chart;
 
@@ -15,7 +23,7 @@ export class LineChartComponent implements AfterViewInit {
   }
   private createLineChart(): void {
     const ctx = this.lineChartCanvas.nativeElement.getContext('2d');
-
+    // static
     if (ctx) {
       this.lineChart = new Chart(ctx, {
         type: 'line',

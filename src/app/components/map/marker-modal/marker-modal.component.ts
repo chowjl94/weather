@@ -5,13 +5,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { LocationMetrics } from '../../../types/mapTypes';
 import { MapService } from '../../../services/map/map.service';
 import { LineChartComponent } from '../line-chart/line-chart.component';
+import { MinimapComponent } from '../minimap/minimap.component';
 
 @Component({
   selector: 'app-marker-modal',
   templateUrl: './marker-modal.component.html',
   styleUrls: ['./marker-modal.component.scss'],
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, CommonModule, LineChartComponent],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    CommonModule,
+    LineChartComponent,
+    MinimapComponent,
+  ],
 })
 export class MarkerModalComponent implements OnInit {
   locationData: LocationMetrics | null = null;

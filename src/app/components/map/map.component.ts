@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MapService } from '../../services/map/map.service';
 
 import * as L from 'leaflet';
@@ -15,6 +15,10 @@ import { MatDialog } from '@angular/material/dialog';
   imports: [],
 })
 export class MapComponent implements OnInit {
+  @Input() latitude: number = 1.3521;
+  @Input() longitude: number = 103.8198;
+  @Input() zoom: number = 12;
+
   map: L.Map | undefined;
   weatherMetaData: WeatherData | undefined;
 
@@ -69,11 +73,15 @@ export class MapComponent implements OnInit {
   }
 
   configureMap() {
-    this.map = L.map('map').setView([1.3521, 103.8198], 12); // SG coords
+    this.map = L.map('map').setView([this.latitude, this.longitude], this.zoom); // SG coords
     // this.map = L.map('map').setView([1.125, 104.0], 11); // Asia/Singapore
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
     }).addTo(this.map);
+
+    setTimeout(() => {
+      this.map?.invalidateSize();
+    }, 0);
   }
 }

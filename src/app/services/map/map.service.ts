@@ -21,10 +21,7 @@ export class MapService {
     latitude: string | number,
     longitude: string | number
   ): Observable<LocationMetrics> {
-    console.log(latitude); // here is logging correct
-    console.log(longitude); // here is logging correct
     const metricsLocationUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=relativehumidity_2m,direct_radiation&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSingapore&start_date=2024-11-01&end_date=2024-11-10`;
-    console.log(metricsLocationUrl); // here is logging correct
     return this.http.get<LocationMetrics>(metricsLocationUrl);
   }
 }

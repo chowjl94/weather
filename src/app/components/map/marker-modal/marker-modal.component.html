@@ -33,13 +33,20 @@
     </button>
     <div [ngSwitch]="dashboardView">
       <div *ngSwitchCase="'LocalMap'" class="metrics">
-        <div class="metric">insert map</div>
+        <div class="metric">
+          <app-minimap
+            [latitude]="data.latitude"
+            [longitude]="data.longitude"
+            [zoom]="14"
+          >
+          </app-minimap>
+        </div>
       </div>
       <div *ngSwitchCase="'Weather'" class="metrics">
         <div class="metric">
           <p><strong>Highest</strong> Highest Humidity</p>
           <p><strong>Lowest</strong> Lowest</p>
-          <app-line-chart></app-line-chart>
+          <app-line-chart [data]="locationData"></app-line-chart>
         </div>
         <div class="chart-container"></div>
       </div>
