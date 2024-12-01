@@ -10,6 +10,15 @@
         Local Map
       </li>
       <li
+        *ngIf="currentTimeFrame === 'hourly'"
+        (click)="switchView('Radiation')"
+        [class.selected]="dashboardView === 'Radiation'"
+        class="dashboard-item"
+      >
+        Radiation
+      </li>
+      <li
+        *ngIf="currentTimeFrame === 'hourly'"
         (click)="switchView('Weather')"
         [class.selected]="dashboardView === 'Weather'"
         class="dashboard-item"
@@ -17,17 +26,21 @@
         Weather
       </li>
       <li
-        (click)="switchView('Radiation')"
-        [class.selected]="dashboardView === 'Radiation'"
+        *ngIf="currentTimeFrame === 'daily'"
+        (click)="switchView('Temperature')"
+        [class.selected]="dashboardView === 'Temperature'"
         class="dashboard-item"
       >
-        Radiation
+        Temperature
       </li>
     </ul>
   </div>
 
   <div class="right-column">
-    <h3>{{ data.name }}</h3>
+    <h3>
+      {{ data.name }} / {{ currentTimeFrame }} / {{ data.latitude }} ,
+      {{ data.longitude }}
+    </h3>
     <button mat-icon-button class="close-button" mat-dialog-close>
       &times;
     </button>
@@ -43,24 +56,34 @@
         </div>
       </div>
       <div *ngSwitchCase="'Weather'" class="metrics">
-        <div class="metric">
-          <p><strong>Highest</strong> Highest Humidity</p>
-          <p><strong>Lowest</strong> Lowest</p>
-          <app-line-chart [data]="locationData"></app-line-chart>
+        <div class="chart-container">
+          <div class="metric">
+            <app-line-chart
+              [data]="locationData"
+              [dashboardView]="dashboardView"
+            ></app-line-chart>
+          </div>
         </div>
-        <div class="chart-container"></div>
       </div>
-      <div *ngSwitchCase="'Radiation'" class="timeseries">
-        <div class="metric">
-          <p><strong>Highest</strong> Highest Temp</p>
-          <p><strong>Lowest</strong> Lowest</p>
+      <div *ngSwitchCase="'Radiation'" class="metrics">
+        <div class="chart-container">
+          <div class="metric">
+            <app-line-chart
+              [data]="locationData"
+              [dashboardView]="dashboardView"
+            ></app-line-chart>
+          </div>
         </div>
-        <div class="metric">
-          <p><strong>Highest</strong> Highest Radiation</p>
-          <p><strong>Lowest</strong> Lowest</p>
+      </div>
+      <div *ngSwitchCase="'Temperature'" class="metrics">
+        <div class="chart-container">
+          <div class="metric">
+            <app-line-chart
+              [data]="locationData"
+              [dashboardView]="dashboardView"
+            ></app-line-chart>
+          </div>
         </div>
-        <div class="chart-container">Temp chart</div>
-        <div class="chart-container">Radiation chart</div>
       </div>
       <div *ngSwitchDefault>
         <p>Select a view from the list above.</p>

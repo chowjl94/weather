@@ -41,4 +41,14 @@
   .nav-item input::placeholder {
     color: rgba(255, 255, 255, 0.8);
   }
-  
+
+  .iconNav{
+    color:white;
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s;
+  }
+
+  .iconNav:hover {
+    background-color: #f0f0f0;
+    color:#333;
+    border-radius: 50%;
+  }

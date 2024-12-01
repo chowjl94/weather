@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { WeatherData, LocationMetrics } from '../../types/mapTypes';
 
 @Injectable({
@@ -10,7 +10,18 @@ export class MapService {
   private foreCastLocationsUrl =
     'https://api.data.gov.sg/v1/environment/2-hour-weather-forecast';
 
+  private timeFrameSubject = new BehaviorSubject<'hourly' | 'daily'>('hourly');
+  timeFrame$ = this.timeFrameSubject.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  setTimeFrame(mode: 'hourly' | 'daily'): void {
+    this.timeFrameSubject.next(mode);
+  }
+
+  getTimeFrame(): 'hourly' | 'daily' {
+    return this.timeFrameSubject.value;
+  }
 
   // gets weather forecast and locations
   getWeatherData(): Observable<WeatherData> {

@@ -1,18 +1,12 @@
 <div id="map-container">
-  <!-- Navbar -->
   <div class="navbar">
     <div class="nav-item">
-      <img src="gear-icon.png" alt="Settings" />
-    </div>
-    <div class="nav-item">
-      <img src="search-icon.png" alt="Search" />
+      <mat-icon class="iconNav" (click)="search()">search</mat-icon>
       <input type="text" placeholder="Search" />
     </div>
+
     <div class="nav-item">
-      <img src="bell-icon.png" alt="Notifications" />
-    </div>
-    <div class="nav-item">
-      <img src="user-icon.png" alt="User" />
+      <mat-icon class="iconNav" (click)="toggleTune()">tune</mat-icon>
     </div>
   </div>
 </div>
