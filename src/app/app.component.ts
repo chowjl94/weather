@@ -8,8 +8,16 @@ import { MapComponent } from './components/map/map.component';
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, MapComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'weather';
+
+  triggerWindowResize(): void {
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  ngOnInit() {
+    this.triggerWindowResize();
+  }
 }
