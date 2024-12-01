@@ -36,7 +36,6 @@ export class MarkerModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
-    // this.timeFrame = this.mapService.timeFrame$; subscribe to timeFrame
     this.getTimeFrame();
   }
 
@@ -71,15 +70,4 @@ export class MarkerModalComponent implements OnInit {
     this.dashboardView = viewName;
     console.log(`Switched to view: ${this.dashboardView}`);
   }
-
-  // showItem(viewName: 'Radiation' | 'Weather' | 'Temperature'): boolean {
-  //   this.dashboardView = viewName;
-  //   return (
-  //     (this.currentTimeFrame === 'hourly' &&
-  //       (this.dashboardView === 'Radiation' ||
-  //         this.dashboardView === 'Weather')) ||
-  //     (this.currentTimeFrame === 'daily' &&
-  //       this.dashboardView === 'Temperature')
-  //   );
-  // }
 }

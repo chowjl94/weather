@@ -52,3 +52,7 @@
     color:#333;
     border-radius: 50%;
   }
+
+  .dropdown-content {
+    padding: 10px;
+  }

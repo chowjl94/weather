@@ -2,11 +2,37 @@
   <div class="navbar">
     <div class="nav-item">
       <mat-icon class="iconNav" (click)="search()">search</mat-icon>
-      <input type="text" placeholder="Search" />
+      <input
+        type="text"
+        placeholder="Search"
+        (keydown.enter)="search()"
+        #searchInput
+      />
     </div>
 
     <div class="nav-item">
-      <mat-icon class="iconNav" (click)="toggleTune()">tune</mat-icon>
+      <mat-icon class="iconNav" [matMenuTriggerFor]="menu">tune</mat-icon>
+      <mat-menu #menu="matMenu">
+        <div class="dropdown-content">
+          <mat-slide-toggle (click)="toggleTimeFrame()">{{
+            timeFrame
+          }}</mat-slide-toggle>
+        </div>
+      </mat-menu>
     </div>
+
+    <ng-container *ngIf="timeFrame === 'hourly'; else lightMode">
+      <mat-icon
+        matTooltip="Hourly"
+        class="iconNavTooltip"
+        matTooltipPosition="below"
+        >hourglass_full</mat-icon
+      >
+    </ng-container>
+    <ng-template #lightMode>
+      <mat-icon matTooltip="Daily" matTooltipPosition="below"
+        >light_mode</mat-icon
+      >
+    </ng-template>
   </div>
 </div>
