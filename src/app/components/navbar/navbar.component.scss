@@ -56,3 +56,14 @@
   .dropdown-content {
     padding: 10px;
   }
+
+  ::ng-deep mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+  }
+  
+  ::ng-deep mat-form-field .mdc-text-field__input {
+    background-color: transparent !important; 
+  }
+
+
+

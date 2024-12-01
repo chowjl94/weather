@@ -23,7 +23,7 @@ export class MapService {
     return this.timeFrameSubject.value;
   }
 
-  // gets weather forecast and locations
+  // gets locations
   getWeatherData(): Observable<WeatherData> {
     return this.http.get<WeatherData>(this.foreCastLocationsUrl);
   }

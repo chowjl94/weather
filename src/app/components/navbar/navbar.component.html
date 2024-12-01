@@ -1,13 +1,24 @@
 <div id="map-container">
   <div class="navbar">
     <div class="nav-item">
-      <mat-icon class="iconNav" (click)="search()">search</mat-icon>
-      <input
-        type="text"
-        placeholder="Search"
-        (keydown.enter)="search()"
-        #searchInput
-      />
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix class="iconNav" (click)="search()">search</mat-icon>
+        <input
+          matInput
+          placeholder="Search"
+          [matAutocomplete]="auto"
+          [formControl]="searchControl"
+          (keydown.enter)="search()"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let suggestion of suggestions$ | async"
+            [value]="suggestion"
+          >
+            {{ suggestion }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
 
     <div class="nav-item">
