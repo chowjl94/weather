@@ -19,7 +19,7 @@ export class MapComponent implements OnInit {
   @Input() longitude: number = 103.8198;
   @Input() zoom: number = 12;
 
-  map: L.Map | undefined;
+  map!: L.Map;
   weatherMetaData: WeatherData | undefined;
 
   constructor(
@@ -31,6 +31,7 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
     this.configureMap();
     this.getMarkers();
+    this.mapService.setMapInstance(this.map);
   }
 
   getMarkers() {

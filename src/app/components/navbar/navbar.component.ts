@@ -62,9 +62,21 @@ export class NavbarComponent {
   search(): void {
     const query = this.searchControl.value;
     if (query) {
-      console.log(`Searching for: ${query} and panning to `);
-      // Example: Pan to location using MapService
-      // this.mapService.panToLocation(query);
+      console.log(`Searching for: ${query} and panning to ${query}`);
+      this.mapService.getWeatherData().subscribe((data: WeatherData) => {
+        const matchedLocation = data.area_metadata.find(
+          (metadata) =>
+            metadata.name.replace(/\s+/g, '').toLowerCase() ===
+            query.replace(/\s+/g, '').toLowerCase()
+        );
+        if (matchedLocation) {
+          const { latitude, longitude } = matchedLocation.label_location;
+          console.log(latitude, longitude);
+          this.mapService.panToLocation(latitude, longitude);
+        } else {
+          console.log('No matching location');
+        }
+      });
     }
   }
 
