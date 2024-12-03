@@ -45,7 +45,9 @@ export class MarkerModalComponent implements OnInit {
 
     this.mapService.getLocationMetrics(latitude, longitude).subscribe({
       next: (response) => {
+        console.log(`getting location Data for ${latitude}, ${longitude}`);
         this.locationData = response;
+        console.log(response, 'this is response');
       },
       error: (error) => {
         console.error('Error fetching data:', error);

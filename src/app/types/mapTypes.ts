@@ -77,3 +77,13 @@ export interface DataPoint {
   date: Date;
   value: number;
 }
+
+export interface MetricParams {
+  latitude: string | number;
+  longitude: string | number;
+  hourly: string;
+  daily: string;
+  timezone: string;
+  start_date: string;
+  end_date: string;
+}

@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { WeatherData, LocationMetrics } from '../../types/mapTypes';
+import {
+  WeatherData,
+  LocationMetrics,
+  MetricParams,
+} from '../../types/mapTypes';
 import * as L from 'leaflet';
 
 @Injectable({
@@ -23,7 +27,6 @@ export class MapService {
 
   setMapInstance(mapInstance: L.Map): void {
     this.map = mapInstance;
-    console.log('Map instance has been set:', mapInstance); // Debug log
   }
 
   getTimeFrame(): 'hourly' | 'daily' {
@@ -39,10 +42,25 @@ export class MapService {
     latitude: string | number,
     longitude: string | number
   ): Observable<LocationMetrics> {
-    const metricsLocationUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=relativehumidity_2m,direct_radiation&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSingapore&start_date=2024-11-01&end_date=2024-11-10`;
-    return this.http.get<LocationMetrics>(metricsLocationUrl);
-  }
+    const queryParams: MetricParams = {
+      latitude: `${latitude}`,
+      longitude: `${longitude}`,
+      hourly: 'relativehumidity_2m,direct_radiation',
+      daily: 'temperature_2m_max,temperature_2m_min',
+      timezone: 'Asia/Singapore',
+      start_date: '2024-11-01',
+      end_date: '2024-11-10',
+    };
 
+    let params = new HttpParams();
+    Object.keys(queryParams).forEach((key) => {
+      params = params.set(key, queryParams[key as keyof MetricParams]);
+    });
+
+    const metricsLocationUrl = 'https://api.open-meteo.com/v1/forecast';
+    console.log(`Request URL: ${metricsLocationUrl}?${params.toString()}`);
+    return this.http.get<LocationMetrics>(metricsLocationUrl, { params });
+  }
   panToLocation(latitude: string | number, longitude: string | number): void {
     if (this.map) {
       this.map.setView([latitude as number, longitude as number], 16);
