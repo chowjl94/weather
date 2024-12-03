@@ -75,8 +75,6 @@ export class MapComponent implements OnInit {
 
   configureMap() {
     this.map = L.map('map').setView([this.latitude, this.longitude], this.zoom); // SG coords
-    // this.map = L.map('map').setView([1.125, 104.0], 11); // Asia/Singapore
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors',
     }).addTo(this.map);

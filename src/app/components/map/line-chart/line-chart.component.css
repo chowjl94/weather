@@ -4,7 +4,16 @@
     margin: 0 auto;
     z-index: 199999;
   }
+
+
   canvas {
     width: 100% !important;
-    height: 400px !important;
+    height: 45vh !important;
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    .canvas {
+        height: 40vh;
+    }
   }

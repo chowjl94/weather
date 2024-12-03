@@ -8,9 +8,9 @@ import * as L from 'leaflet';
   styleUrl: './minimap.component.css',
 })
 export class MinimapComponent implements OnInit {
-  @Input() latitude: number = 1.3521; // Default to Singapore
-  @Input() longitude: number = 103.8198; // Default to Singapore
-  @Input() zoom: number = 12; // Default zoom level
+  @Input() latitude: number = 1.3521;
+  @Input() longitude: number = 103.8198;
+  @Input() zoom: number = 12;
 
   map: L.Map | undefined;
 

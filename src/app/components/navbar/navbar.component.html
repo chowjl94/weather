@@ -2,7 +2,6 @@
   <div class="navbar">
     <div class="nav-item">
       <mat-form-field appearance="fill">
-        <mat-icon matPrefix class="iconNav" (click)="search()">search</mat-icon>
         <input
           matInput
           placeholder="Search"
@@ -10,15 +9,23 @@
           [formControl]="searchControl"
           (keydown.enter)="search()"
         />
+
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option
             *ngFor="let suggestion of suggestions$ | async"
             [value]="suggestion"
+            (click)="search()"
           >
             {{ suggestion }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+    </div>
+
+    <div class="nav-item">
+      <mat-icon class="iconNav" matTooltip="Search" (click)="search()"
+        >search</mat-icon
+      >
     </div>
 
     <div class="nav-item">
@@ -33,17 +40,21 @@
     </div>
 
     <ng-container *ngIf="timeFrame === 'hourly'; else lightMode">
-      <mat-icon
-        matTooltip="Hourly"
-        class="iconNavTooltip"
-        matTooltipPosition="below"
-        >hourglass_full</mat-icon
-      >
+      <div class="nav-item">
+        <mat-icon
+          matTooltip="Hourly"
+          class="iconNavTooltip"
+          matTooltipPosition="below"
+          >hourglass_full</mat-icon
+        >
+      </div>
     </ng-container>
     <ng-template #lightMode>
-      <mat-icon matTooltip="Daily" matTooltipPosition="below"
-        >light_mode</mat-icon
-      >
+      <div class="nav-item">
+        <mat-icon matTooltip="Daily" matTooltipPosition="below"
+          >light_mode</mat-icon
+        >
+      </div>
     </ng-template>
   </div>
 </div>
