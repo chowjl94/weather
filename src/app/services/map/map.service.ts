@@ -7,6 +7,7 @@ import {
   MetricParams,
 } from '../../types/mapTypes';
 import * as L from 'leaflet';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,9 @@ export class MapService {
 
   private timeFrameSubject = new BehaviorSubject<'hourly' | 'daily'>('hourly');
   timeFrame$ = this.timeFrameSubject.asObservable();
+
+  private dateRangeFormSubject = new BehaviorSubject<FormGroup | null>(null);
+  dateRangeForm$ = this.dateRangeFormSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +37,14 @@ export class MapService {
     return this.timeFrameSubject.value;
   }
 
+  setDateRangeForm(form: FormGroup) {
+    this.dateRangeFormSubject.next(form);
+  }
+
+  getDateRangeForm() {
+    return this.dateRangeFormSubject.value;
+  }
+
   // gets locations
   getWeatherData(): Observable<WeatherData> {
     return this.http.get<WeatherData>(this.foreCastLocationsUrl);
@@ -40,16 +52,22 @@ export class MapService {
 
   getLocationMetrics(
     latitude: string | number,
-    longitude: string | number
+    longitude: string | number,
+    startDate: string,
+    endDate: string
   ): Observable<LocationMetrics> {
     const queryParams: MetricParams = {
       latitude: `${latitude}`,
       longitude: `${longitude}`,
-      hourly: 'relativehumidity_2m,direct_radiation',
-      daily: 'temperature_2m_max,temperature_2m_min',
+
+      hourly:
+        'relative_humidity_2m,precipitation_probability,precipitation,rain,showers,direct_radiation',
+      daily:
+        'temperature_2m_max,temperature_2m_min,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max',
+
       timezone: 'Asia/Singapore',
-      start_date: '2024-11-01',
-      end_date: '2024-11-10',
+      start_date: startDate,
+      end_date: endDate,
     };
 
     let params = new HttpParams();
@@ -61,6 +79,7 @@ export class MapService {
     console.log(`Request URL: ${metricsLocationUrl}?${params.toString()}`);
     return this.http.get<LocationMetrics>(metricsLocationUrl, { params });
   }
+
   panToLocation(latitude: string | number, longitude: string | number): void {
     if (this.map) {
       this.map.setView([latitude as number, longitude as number], 16);

@@ -236,7 +236,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
         labels: this.data?.hourly.time.map((time) => formatTime(time)) || [],
         datasets: [
           {
-            data: this.data?.hourly.relativehumidity_2m || [],
+            data: this.data?.hourly.relative_humidity_2m || [],
             label: 'Relative Humidity',
             borderColor: 'rgba(75, 192, 192, 1)',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -244,7 +244,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
         ],
         xtext: 'Time',
         ytext: 'Relative Humidity',
-        units: this.data?.hourly_units.relativehumidity_2m,
+        units: this.data?.hourly_units.relative_humidity_2m,
       }),
       Radiation: () => ({
         labels: this.data?.hourly.time.map((time) => formatTime(time)) || [],

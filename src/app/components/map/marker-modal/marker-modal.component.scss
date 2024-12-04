@@ -71,13 +71,36 @@
     .right-column {
         flex: 4; 
         padding: 0 16px 16px 16px;
-      
-        .metrics {
+
+        .metrics-hourly{
           display: flex;
           flex-direction: row; 
           gap: 16px;
-          flex-wrap: nowrap; 
+          flex-wrap: wrap;  
+        }
       
+        .metrics {
+          display: grid;
+          gap: 16px;
+          grid-template-columns: repeat(2, 1fr);
+
+          .metric-individual-col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px; 
+            width: 100%; 
+          }
+
+
+          .metric-individual {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 8px;
+            border-radius: 8px;
+            color:white;
+            width: auto; 
+          }
+
           .metric {
             flex: 1 1 45%; 
             backdrop-filter: blur(10px);

@@ -31,26 +31,44 @@ interface ApiInfo {
 
 interface HourlyUnits {
   time: string;
-  relativehumidity_2m: string;
+  relative_humidity_2m: string;
   direct_radiation: string;
+  precipitation: string;
+  precipitation_probability: string;
+  rain: string;
+  showers: string;
 }
 
 interface Hourly {
   time: string[];
-  relativehumidity_2m: number[];
+  relative_humidity_2m: number[];
   direct_radiation: number[];
+  precipitation: number[];
+  precipitation_probability: number[];
+  rain: number[];
+  showers: number[];
 }
 
-interface DailyUnits {
+export interface DailyUnits {
   time: string;
   temperature_2m_max: string;
   temperature_2m_min: string;
+  daylight_duration: string;
+  sunrise: string;
+  sunset: string;
+  sunshine_duration: string;
+  uv_index_max: string;
 }
 
-interface Daily {
-  time: string[];
+export interface Daily {
+  daylight_duration: number[];
+  sunrise: string[];
+  sunset: string[];
+  sunshine_duration: number[];
   temperature_2m_max: number[];
   temperature_2m_min: number[];
+  time: string[];
+  uv_index_max: number[];
 }
 
 export interface WeatherData {
@@ -86,4 +104,8 @@ export interface MetricParams {
   timezone: string;
   start_date: string;
   end_date: string;
+}
+
+export interface KeyLabelMapping {
+  [key: string]: string;
 }

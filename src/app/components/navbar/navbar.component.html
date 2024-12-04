@@ -35,6 +35,50 @@
           <mat-slide-toggle (click)="toggleTimeFrame()">{{
             timeFrame
           }}</mat-slide-toggle>
+          <mat-form-field>
+            <mat-label>Select a date range</mat-label>
+            <mat-date-range-input
+              [rangePicker]="dateRangePicker"
+              [formGroup]="dateRangeForm"
+            >
+              <input
+                matStartDate
+                formControlName="startDate"
+                placeholder="Start date"
+              />
+              <input
+                matEndDate
+                formControlName="endDate"
+                placeholder="End date"
+              />
+            </mat-date-range-input>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dateRangePicker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
+            <div class="dateRangeSubmit">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="submitDateRange()"
+                style="color: black"
+                [disabled]="
+                  !dateRangeForm.value.startDate || !dateRangeForm.value.endDate
+                "
+              >
+                Set Range
+              </button>
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="resetDateRange()"
+                style="color: black"
+              >
+                reset
+              </button>
+            </div>
+          </mat-form-field>
         </div>
       </mat-menu>
     </div>

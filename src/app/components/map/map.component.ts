@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class MapComponent implements OnInit {
   @Input() latitude: number = 1.3521;
   @Input() longitude: number = 103.8198;
-  @Input() zoom: number = 12;
+  @Input() zoom: number = 12; // make zoom out, then show one ticker, when zoom of certain level then click make it show more tickers
 
   map!: L.Map;
   weatherMetaData: WeatherData | undefined;

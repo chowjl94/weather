@@ -54,8 +54,29 @@
           >
           </app-minimap>
         </div>
+        <div *ngIf="locationData && locationData.daily">
+          <div class="metric-individual-col">
+            <div *ngFor="let key of getDailyKeys()">
+              <div class="metric-individual">
+                <h3>{{ keyLabelMapping[key] || (key | titlecase) }}:</h3>
+                <div *ngIf="locationData.daily[key]">
+                  <strong>{{ locationData.daily[key][0] }}</strong>
+                  <span
+                    *ngIf="
+                      locationData.daily_units[key] &&
+                      key !== 'sunrise' &&
+                      key !== 'sunset'
+                    "
+                  >
+                    {{ locationData.daily_units[key] }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div *ngSwitchCase="'Weather'" class="metrics">
+      <div *ngSwitchCase="'Weather'" class="metrics-hourly">
         <div class="chart-container">
           <div class="metric">
             <app-line-chart
@@ -65,17 +86,18 @@
           </div>
         </div>
       </div>
-      <div *ngSwitchCase="'Radiation'" class="metrics">
+      <div *ngSwitchCase="'Radiation'" class="metrics-hourly">
         <div class="chart-container">
           <div class="metric">
             <app-line-chart
               [data]="locationData"
               [dashboardView]="dashboardView"
             ></app-line-chart>
+            <div></div>
           </div>
         </div>
       </div>
-      <div *ngSwitchCase="'Temperature'" class="metrics">
+      <div *ngSwitchCase="'Temperature'" class="metrics-hourly">
         <div class="chart-container">
           <div class="metric">
             <app-line-chart

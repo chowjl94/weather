@@ -8,13 +8,21 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { startWith, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { MapService } from '../../services/map/map.service';
 import { WeatherData } from '../../types/mapTypes';
+import { formatDateToYMD } from '../../utils/helper';
 
 @Component({
   selector: 'app-navbar',
@@ -31,14 +39,17 @@ import { WeatherData } from '../../types/mapTypes';
     MatAutocompleteModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
   ],
 })
 export class NavbarComponent {
   timeFrame: 'hourly' | 'daily' = 'hourly';
   searchControl = new FormControl();
   suggestions$: Observable<string[]>;
+  dateRangeForm: FormGroup;
 
-  constructor(private mapService: MapService) {
+  constructor(private mapService: MapService, private fb: FormBuilder) {
     this.timeFrame = this.mapService.getTimeFrame();
 
     this.suggestions$ = this.searchControl.valueChanges.pipe(
@@ -57,6 +68,13 @@ export class NavbarComponent {
           )
       )
     );
+
+    this.dateRangeForm = this.fb.group({
+      startDate: [formatDateToYMD(new Date())],
+      endDate: [formatDateToYMD(new Date())],
+    });
+
+    this.mapService.setDateRangeForm(this.dateRangeForm);
   }
 
   search(): void {
@@ -83,5 +101,28 @@ export class NavbarComponent {
   toggleTimeFrame(): void {
     this.timeFrame = this.timeFrame === 'hourly' ? 'daily' : 'hourly';
     this.mapService.setTimeFrame(this.timeFrame);
+  }
+
+  submitDateRange(): void {
+    const { startDate, endDate } = this.dateRangeForm.value;
+
+    if (startDate && endDate) {
+      const formattedStartDate = startDate.toISOString().split('T')[0];
+      const formattedEndDate = endDate.toISOString().split('T')[0];
+
+      console.log('Selected date range:', {
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+      });
+    } else {
+      console.log('Please select a complete date range.');
+    }
+  }
+
+  resetDateRange(): void {
+    this.dateRangeForm.reset({
+      startDate: null,
+      endDate: null,
+    });
   }
 }
